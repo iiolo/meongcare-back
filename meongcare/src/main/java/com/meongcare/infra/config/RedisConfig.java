@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
@@ -19,14 +20,16 @@ public class RedisConfig {
     @Value("${spring.data.redis.host}")
     private String host;
 
-    @Bean
-    public RedisConnectionFactory redisConnectionFactory() throws Exception {
-        System.out.println("===== Redis =====");
-        System.out.println("Host = " + host);
-        System.out.println("Port = " + port);
-        System.out.println("IP = " + java.net.InetAddress.getByName(host));
+    @Value("${spring.data.redis.password:}")
+    private String password;
 
-        return new LettuceConnectionFactory(host, port);
+    @Bean
+    public RedisConnectionFactory redisConnectionFactory() {
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(host, port);
+        if (password != null && !password.isBlank()) {
+            config.setPassword(password);
+        }
+        return new LettuceConnectionFactory(config);
     }
 
     @Bean
