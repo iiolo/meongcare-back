@@ -20,7 +20,12 @@ public class RedisConfig {
     private String host;
 
     @Bean
-    public RedisConnectionFactory redisConnectionFactory() {
+    public RedisConnectionFactory redisConnectionFactory() throws Exception {
+        System.out.println("===== Redis =====");
+        System.out.println("Host = " + host);
+        System.out.println("Port = " + port);
+        System.out.println("IP = " + java.net.InetAddress.getByName(host));
+
         return new LettuceConnectionFactory(host, port);
     }
 
