@@ -25,15 +25,8 @@ jwt:
     expiration: ---
     header: RefreshToken
 
-cloud:
-  aws:
-    s3:
-      bucket: bucketName
-    region:
-      static: ap-northeast-2
-      auto: false
-    stack:
-      auto: false
-    credentials:
-      access-key: ----
-      secret-key: ----
+r2:
+  account-id: ----
+  access-key: ----
+  secret-key: ----
+  bucket: bucketName
