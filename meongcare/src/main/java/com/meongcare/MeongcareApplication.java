@@ -10,13 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableJpaAuditing
 @EnableScheduling
 @OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
-@SpringBootApplication(
-		exclude = {
-				org.springframework.cloud.aws.autoconfigure.context.ContextInstanceDataAutoConfiguration.class,
-				org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration.class,
-				org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration.class
-		}
-)
+@SpringBootApplication
 public class MeongcareApplication {
 
 	public static void main(String[] args) {
