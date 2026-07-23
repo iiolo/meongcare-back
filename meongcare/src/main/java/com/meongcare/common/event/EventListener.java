@@ -24,9 +24,6 @@ public class EventListener {
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, fallbackExecution = true)
     public void sendFcmMessage(FcmNotificationDTO fcmNotificationDTO) {
-        messageHandler.sendMessage(
-                fcmNotificationDTO.getTitle(), fcmNotificationDTO.getBody(), fcmNotificationDTO.getFcmToken(),
-                fcmNotificationDTO.getNotificationType(), fcmNotificationDTO.getMemberId(), fcmNotificationDTO.getDogId()
-        );
+        messageHandler.sendMessage(fcmNotificationDTO);
     }
 }

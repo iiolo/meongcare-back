@@ -32,6 +32,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -217,8 +218,14 @@ public class SupplementsService {
                 String title = createPushAlarmTitle(now, alarmSupplementsVO.getSupplementsName());
                 String body = createPushAlarmBody(alarmSupplementsVO.getDogName());
                 String fcmToken = member.getFcmToken();
+                Map<String, String> alarmData = Map.of(
+                        "dogName", alarmSupplementsVO.getDogName(),
+                        "supplementsName", alarmSupplementsVO.getSupplementsName(),
+                        "intakeTime", LocalDateTimeUtils.createHourMinuteTime(now)
+                );
                 eventPublisher.publishEvent(FcmNotificationDTO.of(title, body, fcmToken,
-                        NotificationType.SUPPLEMENTS, member.getId(), alarmSupplementsVO.getDogId()
+                        NotificationType.SUPPLEMENTS, member.getId(), alarmSupplementsVO.getDogId(),
+                        alarmData
                 ));
             }
         }

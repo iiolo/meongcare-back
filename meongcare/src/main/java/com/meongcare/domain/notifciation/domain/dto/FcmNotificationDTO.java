@@ -4,6 +4,9 @@ import com.meongcare.domain.notifciation.domain.entity.NotificationType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Collections;
+import java.util.Map;
+
 @Getter
 @AllArgsConstructor
 public class FcmNotificationDTO {
@@ -13,6 +16,7 @@ public class FcmNotificationDTO {
     private NotificationType notificationType;
     private Long memberId;
     private Long dogId;
+    private Map<String, String> data;
 
     public static FcmNotificationDTO of(
             String title, String body, String fcmToken,
@@ -24,7 +28,24 @@ public class FcmNotificationDTO {
                 fcmToken,
                 notificationType,
                 memberId,
-                dogId
+                dogId,
+                Collections.emptyMap()
+        );
+    }
+
+    public static FcmNotificationDTO of(
+            String title, String body, String fcmToken,
+            NotificationType notificationType, Long memberId, Long dogId,
+            Map<String, String> data
+    ) {
+        return new FcmNotificationDTO(
+                title,
+                body,
+                fcmToken,
+                notificationType,
+                memberId,
+                dogId,
+                data
         );
     }
 }
