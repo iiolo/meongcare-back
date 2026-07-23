@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class MemberService {
 
-    @Value("${cloud.aws.s3.bucket}")
+    @Value("${r2.bucket}")
     private String bucket;
 
     private final MemberRepository memberRepository;

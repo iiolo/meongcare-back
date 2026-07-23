@@ -24,13 +24,13 @@ import java.util.UUID;
 @Component
 public class ImageHandlerS3 implements ImageHandler {
 
-    @Value("${cloud.aws.s3.bucket}")
+    @Value("${r2.bucket}")
     private String bucket;
 
     private final S3Api s3Api;
     private static final String EMPTY_IMAGE_URL = "";
     private static final String FILE_SEPARATOR = "/";
-    private static final int BUCKET_NAME_INDEX = 2;
+    private static final int BUCKET_NAME_INDEX = 3;
 
 
     @Override

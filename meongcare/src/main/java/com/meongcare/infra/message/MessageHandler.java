@@ -1,10 +1,10 @@
 package com.meongcare.infra.message;
 
-import com.meongcare.domain.notifciation.domain.entity.NotificationType;
+import com.meongcare.domain.notifciation.domain.dto.FcmNotificationDTO;
 
 public interface MessageHandler {
 
-    void sendMessage(String title, String body, String fcmToken, NotificationType notificationType, Long memberId, Long dogId);
+    void sendMessage(FcmNotificationDTO fcmNotificationDTO);
 
 
 }

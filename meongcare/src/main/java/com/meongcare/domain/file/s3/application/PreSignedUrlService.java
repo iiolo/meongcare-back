@@ -14,7 +14,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class PreSignedUrlService {
 
-    @Value("${cloud.aws.s3.bucket}")
+    @Value("${r2.bucket}")
     private String bucket;
 
     private final AmazonS3Client amazonS3Client;

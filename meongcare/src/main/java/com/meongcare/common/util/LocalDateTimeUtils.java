@@ -16,6 +16,7 @@ import java.util.Objects;
 public class LocalDateTimeUtils {
 
     private static final DateTimeFormatter AM_PM_Formatter = DateTimeFormatter.ofPattern("a hh:mm");
+    private static final DateTimeFormatter HOUR_MINUTE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
     private static final int FIRST_DAY_OF_MONTH = 1;
 
@@ -35,6 +36,10 @@ public class LocalDateTimeUtils {
 
     public static String createAMPMTime(LocalTime dateTime) {
         return dateTime.format(AM_PM_Formatter);
+    }
+
+    public static String createHourMinuteTime(LocalTime dateTime) {
+        return dateTime.format(HOUR_MINUTE_FORMATTER);
     }
 
     public static LocalTime createNowWithZeroSecond() {

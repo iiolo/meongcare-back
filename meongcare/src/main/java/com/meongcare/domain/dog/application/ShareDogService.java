@@ -19,6 +19,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -41,8 +43,13 @@ public class ShareDogService {
         Member requester = memberRepository.getMember(requesterId);
         Dog dog = dogRepository.getDog(dogId);
 
+        Map<String, String> alarmData = Map.of(
+                "dogName", dog.getName(),
+                "requesterEmail", requester.getEmail()
+        );
         eventPublisher.publishEvent(FcmNotificationDTO.of(createPushAlarmTitle(requester.getEmail()),
-                createPushAlarmBody(dog.getName()), accepter.getFcmToken(), NotificationType.SHARE_DOG, accepter.getId(), dogId));
+                createPushAlarmBody(dog.getName()), accepter.getFcmToken(), NotificationType.SHARE_DOG, accepter.getId(), dogId,
+                alarmData));
 
         //공유 대기
         ShareWaiting shareWaiting = ShareWaiting.of(dogId, requesterId, accepter.getId());
